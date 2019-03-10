@@ -23,7 +23,7 @@ public class WiFiAction {
      */
     public static final String ACTION_CONNECT_STARTED = "android.net.wifi.STATE_CONNECT_STARTED";
     public static final String ACTION_CONNECT_TIMEOUT = "android.net.wifi.STATE_CONNECT_TIMEOUT";
-
+    public static final long timeDelay = 1000*5;
     private static boolean isConnecting = false;
 
     /**

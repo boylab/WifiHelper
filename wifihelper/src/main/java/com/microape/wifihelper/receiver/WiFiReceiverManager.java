@@ -18,8 +18,8 @@ import com.microape.wifihelper.callback.OnWifiScanCallBack;
 public class WiFiReceiverManager {
 
     private boolean registerTag = false;
-    private WiFiStatus wiFiStatus = new WiFiStatus();
-    private WiFiReceiver wiFiReceiver = new WiFiReceiver(wiFiStatus);
+    private WiFiStatus wiFiStatus = WiFiStatus.newInstance();
+    private WiFiReceiver wiFiReceiver = new WiFiReceiver();
 
     public WiFiReceiverManager() {
 
@@ -62,8 +62,8 @@ public class WiFiReceiverManager {
     //开始连接WiFi的超时广播
     public void startConnectTimer(Context context, ScanResult wifiResult,  long delay) {
         Intent intent01 = new Intent(WiFiAction.ACTION_CONNECT_STARTED);
-        intent01.putExtra(WiFiReceiver.TARGET_SSID, wifiResult.SSID);
-        intent01.putExtra(WiFiReceiver.TARGET_BSSID, wifiResult.BSSID);
+        intent01.putExtra(WiFiUnit.TARGET_SSID, wifiResult.SSID);
+        intent01.putExtra(WiFiUnit.TARGET_BSSID, wifiResult.BSSID);
         context.sendBroadcast(intent01);
 
         Intent intent02 = new Intent(WiFiAction.ACTION_CONNECT_TIMEOUT);
