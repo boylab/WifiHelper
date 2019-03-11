@@ -1,11 +1,12 @@
 package com.microape.wifihelper;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         btnPermissions.setClickable(isSuportWiFi);
     }
 
-    @NeedsPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+    @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
     public void permCheck() {
         //Toast.makeText(this, "Permission for camera granted", Toast.LENGTH_SHORT).show();
         isPermWiFi = true;
@@ -76,23 +78,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //String[] value = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-    @OnShowRationale(value = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
-    public void asdfadfa1(RequiresPermission permission){
+    @OnShowRationale({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
+    public void onShowLocation(PermissionRequest request){
 
     }
 
-    @OnPermissionDenied(Manifest.permission.ACCESS_COARSE_LOCATION)
-    public void asdfadfa2(){
+    @OnPermissionDenied({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
+    public void onLocationDenied(){
 
     }
 
-    @OnNeverAskAgain(Manifest.permission.ACCESS_COARSE_LOCATION)
-    public void asdfadfa3(){
+    @OnNeverAskAgain({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
+    public void onLocationNeverAsk(){
 
     }
 
-
-
-
+    @SuppressLint("NeedOnRequestPermissionsResult")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        MainActivityPermissionsDispatcher.permCheckWithPermissionCheck(this);
+    }
 }

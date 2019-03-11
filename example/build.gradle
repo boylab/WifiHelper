@@ -28,7 +28,7 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation "com.github.hotchemi:permissionsdispatcher:3.1.0"
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.1.0"
+    implementation "com.github.hotchemi:permissionsdispatcher:+"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:+"
 
 }
