@@ -11,9 +11,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 
-import com.microape.wifihelper.callback.OnWifiConnCallBack;
-import com.microape.wifihelper.callback.OnWifiOpenCallBack;
-import com.microape.wifihelper.callback.OnWifiScanCallBack;
+import com.microape.wifihelper.callback.WiFiAdapter;
 import com.microape.wifihelper.utils.WiFiUtil;
 
 import java.util.List;
@@ -31,26 +29,11 @@ import java.util.List;
 
 public class WiFiReceiver extends BroadcastReceiver {
 
-    private OnWifiOpenCallBack onWifiOpenCallBack;
-    private OnWifiScanCallBack onWifiScanCallBack;
-    private OnWifiConnCallBack onWifiConnCallBack;
-
+    private WiFiAdapter wiFiAdapter;
     private WiFiUnit targetWifi;
 
-    public void setOnWifiConnCallBack(OnWifiConnCallBack onWifiConnCallBack) {
-        this.onWifiConnCallBack = onWifiConnCallBack;
-    }
-
-    public OnWifiConnCallBack getOnWifiConnCallBack() {
-        return onWifiConnCallBack;
-    }
-
-    public void setOnWifiOpenCallBack(OnWifiOpenCallBack onWifiOpenCallBack) {
-        this.onWifiOpenCallBack = onWifiOpenCallBack;
-    }
-
-    public void setOnWifiScanCallBack(OnWifiScanCallBack onWifiScanCallBack) {
-        this.onWifiScanCallBack = onWifiScanCallBack;
+    public WiFiReceiver(WiFiAdapter wiFiAdapter) {
+        this.wiFiAdapter = wiFiAdapter;
     }
 
     @Override
@@ -60,25 +43,25 @@ public class WiFiReceiver extends BroadcastReceiver {
             int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, -1);
             if (wifiState == WifiManager.WIFI_STATE_ENABLED){
                 // TODO: 2018-09-13 wifi打开
-                if (onWifiOpenCallBack != null){
-                    onWifiOpenCallBack.onWifiStateOpen();
+                if (wiFiAdapter != null){
+                    wiFiAdapter.wifiStateOpen();
                 }
             }else if (wifiState == WifiManager.WIFI_STATE_DISABLED){
                 // TODO: 2018-09-13 wifi关闭
-                if (onWifiOpenCallBack != null){
-                    onWifiOpenCallBack.onWifiStateClose();
+                if (wiFiAdapter != null){
+                    wiFiAdapter.wifiStateClose();
                 }
             }
         }else if (WiFiAction.SCAN_RESULTS_START_ACTION.equals(action)) {
             // TODO: 2018-11-27 wifi 扫描开始
-            if (onWifiScanCallBack != null){
-                onWifiScanCallBack.onWifiScanStarted();
+            if (wiFiAdapter != null){
+                wiFiAdapter.wifiScanStarted();
             }
         }else if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(action)) {
             // TODO: 2018-11-27 wifi 扫描结束
             if (WiFiStatus.newInstance().isScan()) {
                 WifiManager wifiManager  = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                List<ScanResult> scanResults = wifiManager.getScanResults();
+                @SuppressLint("MissingPermission") List<ScanResult> scanResults = wifiManager.getScanResults();
 
                 if(scanResults != null && scanResults.size() > 0) {
                     for (int i = 0; i < scanResults.size(); i++) {
@@ -92,8 +75,8 @@ public class WiFiReceiver extends BroadcastReceiver {
                     }
                 }
                 // TODO: 2018-09-13 回调
-                if (onWifiScanCallBack != null){
-                    onWifiScanCallBack.onWifiScanFound(scanResults);
+                if (wiFiAdapter != null){
+                    wiFiAdapter.wifiScanFound(scanResults);
                 }
             }
         } else if (WiFiAction.NETWORK_STATE_CHANGED_ACTION.equals(action)){
@@ -114,13 +97,13 @@ public class WiFiReceiver extends BroadcastReceiver {
                     WiFiAction.setWillDisConnect(true);
                 }else if (WiFiAction.isWillConnect() && state == NetworkInfo.State.CONNECTED){
                     WiFiAction.setWillConnect(false);
-                    if (onWifiConnCallBack != null ){
-                        onWifiConnCallBack.onWifiConnected();
+                    if (wiFiAdapter != null ){
+                        wiFiAdapter.wifiConnected();
                     }
                 }else if (WiFiAction.isWillDisConnect() && state == NetworkInfo.State.DISCONNECTED){
                     WiFiAction.setWillDisConnect(false);
-                    if (onWifiConnCallBack != null ){
-                        onWifiConnCallBack.onWifiDisConnected();
+                    if (wiFiAdapter != null ){
+                        wiFiAdapter.wifiDisConnected();
                     }
                 }
             }
@@ -128,8 +111,8 @@ public class WiFiReceiver extends BroadcastReceiver {
             // TODO: 2018-11-27  自定义广播、手机已经连上指定WiFi
             String wifiName = intent.getStringExtra(WiFiUnit.TARGET_SSID);
             if (WiFiUtil.newInstance().isMatcheName(wifiName)) {
-                if (onWifiConnCallBack != null ){
-                    onWifiConnCallBack.onWifiConnected();
+                if (wiFiAdapter != null ){
+                    wiFiAdapter.wifiConnected();
                 }
             }
         }else if (WiFiAction.ACTION_CONNECT_STARTED.equals(action)) {
@@ -148,25 +131,25 @@ public class WiFiReceiver extends BroadcastReceiver {
             String connectWifi = getWifiSSID(context);
             if (WiFiUtil.newInstance().isMatcheName(targetWifi.getTargetSSID()) && WiFiUtil.newInstance().isMatcheName(connectWifi)){
                 if (connectWifi.equals(targetWifi.getTargetSSID())){
-                    if (onWifiConnCallBack != null){
-                        onWifiConnCallBack.onWifiConnected();
+                    if (wiFiAdapter != null){
+                        wiFiAdapter.wifiConnected();
                     }
                 }else {
-                    if (onWifiConnCallBack != null){
-                        onWifiConnCallBack.onWifiConnectFail();
+                    if (wiFiAdapter != null){
+                        wiFiAdapter.wifiConnectFail();
                     }
                 }
             }else {
-                if (onWifiConnCallBack != null){
-                    onWifiConnCallBack.onWifiConnectFail();
+                if (wiFiAdapter != null){
+                    wiFiAdapter.wifiConnectFail();
                 }
             }
         } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)){
             int error = intent.getIntExtra(WifiManager.EXTRA_SUPPLICANT_ERROR, 0);
             if (WifiManager.ERROR_AUTHENTICATING == error) {
                 //TODO: 2018-09-14  密码错误,认证失败、待定？？？
-                if (onWifiConnCallBack != null){
-                    onWifiConnCallBack.onWifiConnectFail();
+                if (wiFiAdapter != null){
+                    wiFiAdapter.wifiConnectFail();
                 }
             }
         }else {
@@ -180,12 +163,13 @@ public class WiFiReceiver extends BroadcastReceiver {
      * @param context 上下文
      * @return  WIFI 的SSID
      */
+    @SuppressLint("MissingPermission")
     public String getWifiSSID(Context context) {
         String ssid="unknown id";
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O||Build.VERSION.SDK_INT > Build.VERSION_CODES.O_MR1) {
             WifiManager mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             assert mWifiManager != null;
-            WifiInfo info = mWifiManager.getConnectionInfo();
+             WifiInfo info = mWifiManager.getConnectionInfo();
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                 return info.getSSID();

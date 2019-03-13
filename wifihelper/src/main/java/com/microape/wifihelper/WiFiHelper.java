@@ -1,6 +1,7 @@
 package com.microape.wifihelper;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
@@ -43,11 +44,11 @@ public class WiFiHelper {
         return WiFiHelper.SingletonInstance.INSTANCE;
     }
 
-    public WiFiHelper init(Context context){
+    public WiFiHelper init(Application context){
         this.context = context.getApplicationContext();
         wiFiReceiverManager.registerWiFiReceiver(context);
 
-        wifiManager= (WifiManager) this.context.getSystemService(Context.WIFI_SERVICE);
+        wifiManager= (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         wiFiUtil = WiFiUtil.newInstance().initUtil(context, wifiManager);
 
         /*WifiInfo mWifiInfo = wifiManager.getConnectionInfo();
@@ -80,6 +81,7 @@ public class WiFiHelper {
     }
 
     //open wifi
+    @SuppressLint("MissingPermission")
     public void enable(){
         if (!wifiManager.isWifiEnabled()) {
             wifiManager.setWifiEnabled(true);
@@ -87,6 +89,7 @@ public class WiFiHelper {
     }
 
     //close wifi
+    @SuppressLint("MissingPermission")
     public void disable(){
         if (wifiManager.isWifiEnabled()) {
             wifiManager.setWifiEnabled(false);
@@ -112,7 +115,7 @@ public class WiFiHelper {
             context.sendBroadcast(intent);
 
             // TODO: 2019/3/10  目前暂时可用、Android P之后看如何处理
-            boolean startScan = wifiManager.startScan();
+            @SuppressLint("MissingPermission") boolean startScan = wifiManager.startScan();
         }
     }
 
@@ -122,8 +125,8 @@ public class WiFiHelper {
             ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             @SuppressLint("MissingPermission") NetworkInfo mWifiInfo = connManager.getActiveNetworkInfo();
             if (mWifiInfo != null && mWifiInfo.isConnected()){
-                DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
-                WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+                @SuppressLint("MissingPermission") DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
+                @SuppressLint("MissingPermission") WifiInfo connectionInfo = wifiManager.getConnectionInfo();
                 if (connectionInfo.getBSSID().equals(wifiResult.BSSID)){
                     // TODO: 2018-09-21 如果是已经连上指定wifi、则直接监听通讯
                     Intent intent = new Intent();
@@ -157,12 +160,14 @@ public class WiFiHelper {
     }
 
     // 添加一个网络并连接
+    @SuppressLint("MissingPermission")
     private void addNetWork(WifiConfiguration configuration) {
-        int wcgId = wifiManager.addNetwork(configuration);
+        @SuppressLint("MissingPermission") int wcgId = wifiManager.addNetwork(configuration);
         wifiManager.enableNetwork(wcgId, true);
     }
 
     // 断开指定ID的网络
+    @SuppressLint("MissingPermission")
     private void disConnectionWifi(int netId) {
         wifiManager.disableNetwork(netId);
         wifiManager.disconnect();

@@ -2,8 +2,6 @@ package com.microape.wifihelper.callback;
 
 import android.net.wifi.ScanResult;
 
-import com.microape.wifihelper.receiver.WiFiStatus;
-
 import java.util.List;
 
 /**
@@ -11,14 +9,10 @@ import java.util.List;
  * email:pengle609@163.com
  */
 
-public class OnWifiScanCallBack {
+public interface OnWifiScanCallBack {
 
-    public void onWifiScanStarted(){
-        WiFiStatus.newInstance().setScan(true);
-    }
+    void onWifiScanStarted();
 
-    public void onWifiScanFound(List<ScanResult> scanResults){
-        WiFiStatus.newInstance().setScan(false);
-    }
+    void onWifiScanFound(List<ScanResult> scanResults);
 
 }

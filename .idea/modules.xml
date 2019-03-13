@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WifiHelper.iml" filepath="$PROJECT_DIR$/WifiHelper.iml" />
-      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/wifihelper/wifihelper.iml" filepath="$PROJECT_DIR$/wifihelper/wifihelper.iml" />
     </modules>
   </component>

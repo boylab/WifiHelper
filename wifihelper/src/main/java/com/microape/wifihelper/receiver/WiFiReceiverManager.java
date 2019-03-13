@@ -10,6 +10,7 @@ import android.net.wifi.ScanResult;
 import com.microape.wifihelper.callback.OnWifiConnCallBack;
 import com.microape.wifihelper.callback.OnWifiOpenCallBack;
 import com.microape.wifihelper.callback.OnWifiScanCallBack;
+import com.microape.wifihelper.callback.WiFiAdapter;
 
 /**
  * Created by pengle on 2018-11-23.
@@ -19,7 +20,8 @@ public class WiFiReceiverManager {
 
     private boolean registerTag = false;
     private WiFiStatus wiFiStatus = WiFiStatus.newInstance();
-    private WiFiReceiver wiFiReceiver = new WiFiReceiver();
+    private WiFiAdapter wiFiAdapter = new WiFiAdapter(wiFiStatus);
+    private WiFiReceiver wiFiReceiver = new WiFiReceiver(wiFiAdapter);
 
     public WiFiReceiverManager() {
 
@@ -48,15 +50,15 @@ public class WiFiReceiverManager {
     }
 
     public void setOpenCallBack(OnWifiOpenCallBack onWifiOpenCallBack) {
-        wiFiReceiver.setOnWifiOpenCallBack(onWifiOpenCallBack);
+        wiFiAdapter.setOnWifiOpenCallBack(onWifiOpenCallBack);
     }
 
     public void setSearchCallBack(OnWifiScanCallBack onWifiScanCallBack) {
-        wiFiReceiver.setOnWifiScanCallBack(onWifiScanCallBack);
+        wiFiAdapter.setOnWifiScanCallBack(onWifiScanCallBack);
     }
 
     public void setConnCallBack(OnWifiConnCallBack onWifiConnCallBack) {
-        wiFiReceiver.setOnWifiConnCallBack(onWifiConnCallBack);
+        wiFiAdapter.setOnWifiConnCallBack(onWifiConnCallBack);
     }
 
     //开始连接WiFi的超时广播
