@@ -2,9 +2,12 @@ package com.microape.example;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +18,6 @@ import android.widget.Toast;
 
 import com.microape.wifihelper.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
@@ -26,24 +26,27 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @BindView(R.id.btn_SuportWiFi)
     Button btnSuportWiFi;
-    @BindView(R.id.btn_Permissions)
     Button btnPermissions;
-    @BindView(R.id.btn_Function)
     Button btnFunction;
-    @BindView(R.id.cb_SuportWiFi)
-    CheckBox cbSuportWiFi;
-    @BindView(R.id.cb_Permissions)
-    CheckBox cbPermissions;
+    CheckBox cbSuportWiFi, cbPermissions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
+        btnSuportWiFi = findViewById(R.id.btn_SuportWiFi);
+        btnPermissions = findViewById(R.id.btn_Permissions);
+        btnFunction = findViewById(R.id.btn_Function);
+        cbSuportWiFi = findViewById(R.id.cb_SuportWiFi);
+        cbPermissions = findViewById(R.id.cb_Permissions);
+        btnSuportWiFi.setOnClickListener(this);
+        btnPermissions.setOnClickListener(this);
+        btnFunction.setOnClickListener(this);
+
 
         boolean isSuportWiFi = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI);
         btnPermissions.setEnabled(isSuportWiFi);
@@ -51,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         btnPermissions.setClickable(isSuportWiFi);
     }
 
-    @OnClick({R.id.btn_Permissions, R.id.btn_Function})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_Permissions:
                 // TODO: 2019/3/12 申请权限(编译后自动生成)
@@ -117,5 +120,20 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, WiFiFuncActivity.class);
         startActivity(intent);
     }
+
+    private void getAppDetailSettingIntent(Context context) {
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= 9) {
+            localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+            localIntent.setData(Uri.fromParts("package", getPackageName(), null));
+        } else if (Build.VERSION.SDK_INT <= 8) {
+            localIntent.setAction(Intent.ACTION_VIEW);
+            localIntent.setClassName("com.android.settings","com.android.settings.InstalledAppDetails");
+            localIntent.putExtra("com.android.settings.ApplicationPkgName", getPackageName());
+        }
+        startActivity(localIntent);
+    }
+
 
 }
