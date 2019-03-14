@@ -1,4 +1,4 @@
-package com.microape.wifihelper;
+package com.microape.example;
 
 import org.junit.Test;
 

@@ -19,23 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--dontwarn com.wifihelper.wifihelper.socket.client.**
--dontwarn com.xuhao.didi.socket.common.**
--dontwarn com.xuhao.didi.socket.server.**
--dontwarn com.xuhao.didi.core.**
-
--keep class com.wifihelper.wifihelper.socket.client.** { *; }
--keep class com.xuhao.didi.socket.common.** { *; }
--keep class com.xuhao.didi.socket.server.** { *; }
--keep class com.xuhao.didi.core.** { *; }
-
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
--keep class com.wifihelper.wifihelper.socket.client.sdk.client.OkSocketOptions$* {
-    *;
-}
--keep class com.xuhao.didi.socket.server.impl.OkServerOptions$* {
-    *;
-}
