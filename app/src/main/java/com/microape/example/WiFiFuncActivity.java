@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.microape.wifihelper.R;
 import com.microape.wifihelper.WiFiHelper;
 import com.microape.wifihelper.callback.OnWifiConnCallBack;
 import com.microape.wifihelper.callback.OnWifiOpenCallBack;
@@ -17,7 +16,7 @@ import com.microape.wifihelper.callback.OnWifiScanCallBack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WiFiFuncActivity extends AppCompatActivity implements OnWifiOpenCallBack, OnWifiScanCallBack, OnWifiConnCallBack, View.OnClickListener {
+public class WiFiFuncActivity extends AppCompatActivity implements View.OnClickListener, OnWifiOpenCallBack, OnWifiScanCallBack, OnWifiConnCallBack {
 
     Button btnOpenWiFi;
     Button btnCloseWiFi;
@@ -30,7 +29,7 @@ public class WiFiFuncActivity extends AppCompatActivity implements OnWifiOpenCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_wifi_func);
 
         btnOpenWiFi = findViewById(R.id.btn_OpenWiFi);
         btnCloseWiFi = findViewById(R.id.btn_CloseWiFi);
@@ -81,7 +80,7 @@ public class WiFiFuncActivity extends AppCompatActivity implements OnWifiOpenCal
 
     @Override
     public void onWifiScanFound(List<ScanResult> scanResults) {
-        if (scanResults != null ){
+        if (scanResults != null && !scanResults.isEmpty()){
             wifiList.clear();
             wifiList.addAll(scanResults);
             wiFiListAdapter.notifyDataSetChanged();

@@ -6,9 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,30 +29,31 @@ import permissions.dispatcher.RuntimePermissions;
 @RuntimePermissions
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnSuportWiFi;
-    Button btnPermissions;
-    Button btnFunction;
-    CheckBox cbSuportWiFi, cbPermissions;
+    Button btn_SuportWiFi, btn_Permissions, btn_OpenGPS, btn_Function;
+    CheckBox cb_SuportWiFi, cb_Permissions, cb_OpenGPS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnSuportWiFi = findViewById(R.id.btn_SuportWiFi);
-        btnPermissions = findViewById(R.id.btn_Permissions);
-        btnFunction = findViewById(R.id.btn_Function);
-        cbSuportWiFi = findViewById(R.id.cb_SuportWiFi);
-        cbPermissions = findViewById(R.id.cb_Permissions);
-        btnSuportWiFi.setOnClickListener(this);
-        btnPermissions.setOnClickListener(this);
-        btnFunction.setOnClickListener(this);
+        btn_SuportWiFi = findViewById(R.id.btn_SuportWiFi);
+        btn_Permissions = findViewById(R.id.btn_Permissions);
+        btn_OpenGPS = findViewById(R.id.btn_OpenGPS);
+        btn_Function = findViewById(R.id.btn_Function);
+        cb_SuportWiFi = findViewById(R.id.cb_SuportWiFi);
+        cb_Permissions = findViewById(R.id.cb_Permissions);
+        cb_OpenGPS = findViewById(R.id.cb_OpenGPS);
+        btn_SuportWiFi.setOnClickListener(this);
+        btn_Permissions.setOnClickListener(this);
+        btn_OpenGPS.setOnClickListener(this);
+        btn_Function.setOnClickListener(this);
 
 
         boolean isSuportWiFi = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI);
-        btnPermissions.setEnabled(isSuportWiFi);
-        cbSuportWiFi.setChecked(isSuportWiFi);
-        btnPermissions.setClickable(isSuportWiFi);
+        btn_Permissions.setEnabled(isSuportWiFi);
+        cb_SuportWiFi.setChecked(isSuportWiFi);
+        btn_Permissions.setClickable(isSuportWiFi);
     }
 
     @Override
@@ -59,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // TODO: 2019/3/12 申请权限(编译后自动生成)
                 MainActivityPermissionsDispatcher.needsLocationWithCheck(this);
                 break;
+            case R.id.btn_OpenGPS:
+                openGPS();
+                break;
             case R.id.btn_Function:
                 funcTest();
                 break;
@@ -67,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
     void needsLocation() {
-        cbPermissions.setChecked(true);
+        cb_Permissions.setChecked(true);
     }
 
     @Override
@@ -98,20 +105,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @OnPermissionDenied({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
     void onLocationDenied() {
-        cbPermissions.setChecked(false);
+        cb_Permissions.setChecked(false);
         Toast.makeText(this, R.string.show_location_denied, Toast.LENGTH_SHORT).show();
     }
 
     @OnNeverAskAgain({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
     void onLocationNeverAsk() {
-        cbPermissions.setChecked(false);
+        cb_Permissions.setChecked(false);
         Toast.makeText(this, R.string.show_location_neverask, Toast.LENGTH_SHORT).show();
     }
 
     private void funcTest() {
-        if (!cbSuportWiFi.isChecked()) {
+        if (!cb_SuportWiFi.isChecked()) {
             Toast.makeText(this, R.string.location_non_suport, Toast.LENGTH_SHORT).show();
-        } else if (!cbPermissions.isChecked()) {
+        } else if (!cb_Permissions.isChecked()) {
             Toast.makeText(this, R.string.location_non_permission, Toast.LENGTH_SHORT).show();
         }
 
@@ -131,6 +138,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             localIntent.putExtra("com.android.settings.ApplicationPkgName", getPackageName());
         }
         startActivity(localIntent);
+    }
+
+    public void openGPS(){
+        if (isOPen(MainActivity.this)){
+            WifiManager wifiManager= (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            if (wifiManager.isWifiEnabled()) {
+                cb_OpenGPS.setChecked(true);
+            } else {
+                Toast.makeText(this, "请先开启手机WIFI！", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("温馨提示!")
+                    .setMessage("打开手机GPS才能扫描Wifi，是否开启？")
+                    .setPositiveButton("开启", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("取消", null)
+                    .create()
+                    .show();
+        }
+    }
+
+    /**
+     * 判断GPS是否开启，GPS或者AGPS开启一个就认为是开启的
+     * @param context
+     * @return true 表示开启
+     */
+    public static final boolean isOPen(final Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        // 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快）
+        boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        // 通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+        boolean network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (gps || network) {
+            return true;
+        }
+
+        return false;
     }
 
 

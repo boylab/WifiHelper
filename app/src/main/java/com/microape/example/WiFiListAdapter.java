@@ -8,13 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.microape.wifihelper.R;
-
 import java.util.List;
 
 /**
- * Created by pengle on 2018-11-26.
- * email:pengle609@163.com
+ *  * Author：pengl on 2019/3/14 10:40
+ *  * Email ：pengle609@163.com
+ *  
  */
 public class WiFiListAdapter extends BaseAdapter {
 
@@ -46,7 +45,7 @@ public class WiFiListAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (convertView == null){
             viewHolder = new ViewHolder();
-            convertView = layoutInflater.inflate(R.layout.item_wifi, null);
+            convertView = layoutInflater.inflate(R.layout.item_wifi_list, null);
             viewHolder.tv_WiFi_Name = convertView.findViewById(R.id.tv_WiFi_Name);
             viewHolder.tv_WiFi_BSSID = convertView.findViewById(R.id.tv_WiFi_BSSID);
             viewHolder.tv_WiFi_Cap = convertView.findViewById(R.id.tv_WiFi_Cap);

@@ -27,7 +27,7 @@ public class WiFiReceiverManager {
 
     }
 
-    public void registerWiFiReceiver(Context context){
+    public void registerReceiver(Context context){
         if (registerTag){
             return;
         }
@@ -83,7 +83,7 @@ public class WiFiReceiverManager {
 
     }
 
-    public void unRegisterWiFiReceiver(){
+    public void unRegisterReceiver(){
         try {
             if (registerTag){
                 // TODO: 2018-11-23 似乎不需要注销

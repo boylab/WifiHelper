@@ -46,7 +46,7 @@ public class WiFiHelper {
 
     public WiFiHelper init(Application context){
         this.context = context.getApplicationContext();
-        wiFiReceiverManager.registerWiFiReceiver(context);
+        wiFiReceiverManager.registerReceiver(context);
 
         wifiManager= (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         wiFiUtil = WiFiUtil.newInstance().initUtil(context, wifiManager);
@@ -155,7 +155,7 @@ public class WiFiHelper {
 
     public void unRegister(){
         if (wiFiReceiverManager != null){
-            wiFiReceiverManager.unRegisterWiFiReceiver();
+            wiFiReceiverManager.unRegisterReceiver();
         }
     }
 

@@ -3,7 +3,8 @@
 
     <string name="label_suport_wifi">1、设备支持WiFi</string>
     <string name="label_needs_wifiPermission">2、申请权限</string>
-    <string name="label_wifi_function">3、WiFi功能</string>
+    <string name="label_Open_GPS">3、开启GPS</string>
+    <string name="label_wifi_function">4、WiFi功能</string>
 
     <string name="show_location_msg">扫描需要定位权限，应用将要申请定位权限</string>
     <string name="show_location_ok">好的</string>
