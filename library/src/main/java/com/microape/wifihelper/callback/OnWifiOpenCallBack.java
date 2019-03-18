@@ -7,7 +7,7 @@ package com.microape.wifihelper.callback;
 
 public interface OnWifiOpenCallBack {
 
-    void onWifiStateOpen();
+    void onWifiEnable();
 
-    void onWifiStateClose();
+    void onWifiDisable();
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface OnWifiScanCallBack {
 
-    void onWifiScanStarted();
+    void onWifiScanStart();
 
     void onWifiScanFound(List<ScanResult> scanResults);
 

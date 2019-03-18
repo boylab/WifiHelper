@@ -37,21 +37,21 @@ public class WiFiAdapter{
 
     public void wifiStateOpen(){
         if (onWifiOpenCallBack != null){
-            onWifiOpenCallBack.onWifiStateOpen();
+            onWifiOpenCallBack.onWifiEnable();
         }
         wiFiStatus.setEnabled(true);
     }
 
     public void wifiStateClose(){
         if (onWifiOpenCallBack != null){
-            onWifiOpenCallBack.onWifiStateClose();
+            onWifiOpenCallBack.onWifiDisable();
         }
         wiFiStatus.setEnabled(false);
     }
 
     public void wifiScanStarted(){
         if (onWifiScanCallBack != null){
-            onWifiScanCallBack.onWifiScanStarted();
+            onWifiScanCallBack.onWifiScanStart();
         }
         wiFiStatus.setScan(true);
     }

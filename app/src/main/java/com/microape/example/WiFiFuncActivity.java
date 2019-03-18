@@ -64,17 +64,17 @@ public class WiFiFuncActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onWifiStateOpen() {
+    public void onWifiEnable() {
         Toast.makeText(this, "WiFi打开！", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onWifiStateClose() {
+    public void onWifiDisable() {
         Toast.makeText(this, "WiFi关闭！", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onWifiScanStarted() {
+    public void onWifiScanStart() {
         Toast.makeText(this, "WiFi开始扫描！", Toast.LENGTH_SHORT).show();
     }
 

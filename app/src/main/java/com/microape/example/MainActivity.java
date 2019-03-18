@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_OpenGPS.setOnClickListener(this);
         btn_Function.setOnClickListener(this);
 
-
         boolean isSuportWiFi = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI);
         btn_Permissions.setEnabled(isSuportWiFi);
         cb_SuportWiFi.setChecked(isSuportWiFi);
