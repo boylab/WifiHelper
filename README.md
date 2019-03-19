@@ -2,7 +2,7 @@
 WiFi socket
 
 ### Gradle（还未写完）
-~~ ` compile 'com.microape.wifihelper:wifihelper:1.0.1' ` ~~
+~~` compile 'com.microape.wifihelper:wifihelper:1.0.1' `~~
 
 ## Usage
 
