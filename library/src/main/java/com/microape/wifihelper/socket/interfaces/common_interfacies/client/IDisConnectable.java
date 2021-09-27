@@ -1,4 +1,4 @@
-package com.microape.wifihelper.socket.common.interfaces.common_interfacies.client;
+package com.microape.wifihelper.socket.interfaces.common_interfacies.client;
 
 /**
  * Created by xuhao on 2017/5/16.

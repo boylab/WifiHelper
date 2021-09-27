@@ -7,7 +7,7 @@ import com.microape.wifihelper.socket.client.sdk.client.OkSocketOptions;
 import com.microape.wifihelper.socket.client.sdk.client.action.ISocketActionListener;
 import com.microape.wifihelper.socket.client.sdk.client.action.SocketActionAdapter;
 import com.microape.wifihelper.socket.client.sdk.client.connection.IConnectionManager;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.dispatcher.IRegister;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.dispatcher.IRegister;
 
 /**
  * Created by xuhao on 2017/5/18.

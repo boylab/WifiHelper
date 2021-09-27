@@ -45,7 +45,6 @@ public class WiFiFuncActivity extends AppCompatActivity implements View.OnClickL
         wiFiHelper.setOpenCallBack(this);
         wiFiHelper.setSearchCallBack(this);
         wiFiHelper.setConnCallBack(this);
-
     }
 
     @Override

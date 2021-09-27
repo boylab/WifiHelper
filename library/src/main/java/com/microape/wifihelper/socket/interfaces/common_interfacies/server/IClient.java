@@ -1,8 +1,8 @@
-package com.microape.wifihelper.socket.common.interfaces.common_interfacies.server;
+package com.microape.wifihelper.socket.interfaces.common_interfacies.server;
 
 import com.microape.wifihelper.socket.core.protocol.IReaderProtocol;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.client.IDisConnectable;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.client.ISender;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.client.IDisConnectable;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.client.ISender;
 
 import java.io.Serializable;
 

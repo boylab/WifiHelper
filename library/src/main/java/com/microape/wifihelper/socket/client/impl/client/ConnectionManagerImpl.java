@@ -12,9 +12,9 @@ import com.microape.wifihelper.socket.client.sdk.client.OkSocketSSLConfig;
 import com.microape.wifihelper.socket.client.sdk.client.action.IAction;
 import com.microape.wifihelper.socket.client.sdk.client.connection.AbsReconnectionManager;
 import com.microape.wifihelper.socket.client.sdk.client.connection.IConnectionManager;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.IIOManager;
-import com.microape.wifihelper.socket.common.interfaces.default_protocol.DefaultX509ProtocolTrustManager;
-import com.microape.wifihelper.socket.common.interfaces.utils.TextUtils;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.IIOManager;
+import com.microape.wifihelper.socket.interfaces.default_protocol.DefaultX509ProtocolTrustManager;
+import com.microape.wifihelper.socket.interfaces.utils.TextUtils;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

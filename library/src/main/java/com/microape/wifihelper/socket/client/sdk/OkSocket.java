@@ -5,9 +5,9 @@ import com.microape.wifihelper.socket.client.impl.client.ManagerHolder;
 import com.microape.wifihelper.socket.client.sdk.client.ConnectionInfo;
 import com.microape.wifihelper.socket.client.sdk.client.OkSocketOptions;
 import com.microape.wifihelper.socket.client.sdk.client.connection.IConnectionManager;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.dispatcher.IRegister;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.server.IServerActionListener;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.server.IServerManager;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.dispatcher.IRegister;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.server.IServerActionListener;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.server.IServerManager;
 
 /**
  * OkSocket是一款轻量级的Socket通讯框架,可以提供单工,双工的TCP通讯.

@@ -1,4 +1,4 @@
-package com.microape.wifihelper.socket.common.interfaces.common_interfacies.client;
+package com.microape.wifihelper.socket.interfaces.common_interfacies.client;
 
 import com.microape.wifihelper.socket.core.iocore.interfaces.ISendable;
 

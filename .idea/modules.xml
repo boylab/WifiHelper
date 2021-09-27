@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WifiHelper.iml" filepath="$PROJECT_DIR$/WifiHelper.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WifiHelper.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WifiHelper.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/WifiHelper.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/WifiHelper.library.iml" />
     </modules>
   </component>
 </project>

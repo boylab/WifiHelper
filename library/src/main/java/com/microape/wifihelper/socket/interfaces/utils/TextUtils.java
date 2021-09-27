@@ -1,4 +1,4 @@
-package com.microape.wifihelper.socket.common.interfaces.utils;
+package com.microape.wifihelper.socket.interfaces.utils;
 
 public class TextUtils {
     public static boolean isEmpty(String str) {

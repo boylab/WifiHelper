@@ -5,9 +5,9 @@ import com.microape.wifihelper.socket.client.impl.client.abilities.IConnectionSw
 import com.microape.wifihelper.socket.client.sdk.client.ConnectionInfo;
 import com.microape.wifihelper.socket.client.sdk.client.OkSocketOptions;
 import com.microape.wifihelper.socket.client.sdk.client.connection.IConnectionManager;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.server.IServerManager;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.server.IServerManagerPrivate;
-import com.microape.wifihelper.socket.common.interfaces.utils.SPIUtils;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.server.IServerManager;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.server.IServerManagerPrivate;
+import com.microape.wifihelper.socket.interfaces.utils.SPIUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

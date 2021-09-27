@@ -1,4 +1,4 @@
-package com.microape.wifihelper.socket.common.interfaces.common_interfacies;
+package com.microape.wifihelper.socket.interfaces.common_interfacies;
 
 
 import com.microape.wifihelper.socket.core.iocore.interfaces.IIOCoreOptions;

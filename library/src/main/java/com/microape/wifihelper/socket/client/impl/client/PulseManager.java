@@ -5,7 +5,7 @@ import com.microape.wifihelper.socket.client.impl.exceptions.DogDeadException;
 import com.microape.wifihelper.socket.client.sdk.client.OkSocketOptions;
 import com.microape.wifihelper.socket.client.sdk.client.bean.IPulse;
 import com.microape.wifihelper.socket.client.sdk.client.connection.IConnectionManager;
-import com.microape.wifihelper.socket.common.interfaces.basic.AbsLoopThread;
+import com.microape.wifihelper.socket.interfaces.basic.AbsLoopThread;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

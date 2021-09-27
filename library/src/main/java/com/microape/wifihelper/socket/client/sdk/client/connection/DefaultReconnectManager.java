@@ -4,8 +4,8 @@ package com.microape.wifihelper.socket.client.sdk.client.connection;
 import com.microape.wifihelper.socket.core.utils.SLog;
 import com.microape.wifihelper.socket.client.impl.exceptions.ManuallyDisconnectException;
 import com.microape.wifihelper.socket.client.sdk.client.ConnectionInfo;
-import com.microape.wifihelper.socket.common.interfaces.basic.AbsLoopThread;
-import com.microape.wifihelper.socket.common.interfaces.utils.ThreadUtils;
+import com.microape.wifihelper.socket.interfaces.basic.AbsLoopThread;
+import com.microape.wifihelper.socket.interfaces.utils.ThreadUtils;
 
 import java.util.Iterator;
 

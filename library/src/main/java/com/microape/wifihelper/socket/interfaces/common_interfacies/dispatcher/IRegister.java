@@ -1,4 +1,4 @@
-package com.microape.wifihelper.socket.common.interfaces.common_interfacies.dispatcher;
+package com.microape.wifihelper.socket.interfaces.common_interfacies.dispatcher;
 
 public interface IRegister<T, E> {
     /**

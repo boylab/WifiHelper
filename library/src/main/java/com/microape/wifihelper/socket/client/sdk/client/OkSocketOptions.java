@@ -7,7 +7,7 @@ import com.microape.wifihelper.socket.client.impl.exceptions.DogDeadException;
 import com.microape.wifihelper.socket.client.sdk.client.connection.AbsReconnectionManager;
 import com.microape.wifihelper.socket.client.sdk.client.connection.DefaultReconnectManager;
 import com.microape.wifihelper.socket.client.sdk.client.connection.abilities.IConfiguration;
-import com.microape.wifihelper.socket.common.interfaces.default_protocol.DefaultNormalReaderProtocol;
+import com.microape.wifihelper.socket.interfaces.default_protocol.DefaultNormalReaderProtocol;
 
 import java.nio.ByteOrder;
 

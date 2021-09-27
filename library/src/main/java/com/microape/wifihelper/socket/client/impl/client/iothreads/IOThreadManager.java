@@ -11,8 +11,8 @@ import com.microape.wifihelper.socket.core.protocol.IReaderProtocol;
 import com.microape.wifihelper.socket.core.utils.SLog;
 import com.microape.wifihelper.socket.client.impl.exceptions.ManuallyDisconnectException;
 import com.microape.wifihelper.socket.client.sdk.client.OkSocketOptions;
-import com.microape.wifihelper.socket.common.interfaces.basic.AbsLoopThread;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.IIOManager;
+import com.microape.wifihelper.socket.interfaces.basic.AbsLoopThread;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.IIOManager;
 
 import java.io.InputStream;
 import java.io.OutputStream;

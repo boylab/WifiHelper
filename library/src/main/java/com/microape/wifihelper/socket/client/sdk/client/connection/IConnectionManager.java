@@ -5,9 +5,9 @@ import com.microape.wifihelper.socket.client.sdk.client.ConnectionInfo;
 import com.microape.wifihelper.socket.client.sdk.client.action.ISocketActionListener;
 import com.microape.wifihelper.socket.client.sdk.client.connection.abilities.IConfiguration;
 import com.microape.wifihelper.socket.client.sdk.client.connection.abilities.IConnectable;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.client.IDisConnectable;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.client.ISender;
-import com.microape.wifihelper.socket.common.interfaces.common_interfacies.dispatcher.IRegister;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.client.IDisConnectable;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.client.ISender;
+import com.microape.wifihelper.socket.interfaces.common_interfacies.dispatcher.IRegister;
 
 /**
  * Created by xuhao on 2017/5/16.

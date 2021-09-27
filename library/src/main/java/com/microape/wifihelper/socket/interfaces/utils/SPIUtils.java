@@ -1,4 +1,4 @@
-package com.microape.wifihelper.socket.common.interfaces.utils;
+package com.microape.wifihelper.socket.interfaces.utils;
 
 import com.microape.wifihelper.socket.core.utils.SLog;
 

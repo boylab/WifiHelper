@@ -1,4 +1,4 @@
-package com.microape.wifihelper.socket.common.interfaces.default_protocol;
+package com.microape.wifihelper.socket.interfaces.default_protocol;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
