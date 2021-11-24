@@ -2,11 +2,12 @@ package com.microape.example;
 
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.microape.wifihelper.WiFiHelper;
 import com.microape.wifihelper.callback.OnWifiConnCallBack;
